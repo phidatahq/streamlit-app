@@ -1,6 +1,5 @@
 from os import getenv
 
-from phidata.app.fastapi import FastApiServer
 from phidata.app.streamlit import StreamlitApp
 from phidata.aws.config import AwsConfig
 from phidata.aws.resource.group import (
@@ -138,33 +137,6 @@ prd_streamlit = StreamlitApp(
     # secrets_file=ws_settings.ws_root.joinpath("workspace/secrets/prd_app_secrets.yml"),
 )
 
-# -*- FastApiServer running on ECS
-prd_fastapi = FastApiServer(
-    name=f"{ws_settings.prd_key}-api",
-    enabled=ws_settings.prd_api_enabled,
-    image=prd_image,
-    command=["api", "start"],
-    ecs_task_cpu="2048",
-    ecs_task_memory="4096",
-    ecs_cluster=prd_ecs_cluster,
-    ecs_service_count=1,
-    aws_subnets=ws_settings.subnet_ids,
-    aws_secrets=[prd_app_secret],
-    aws_security_groups=[prd_app_sg],
-    load_balancer_security_groups=[prd_lb_sg],
-    create_load_balancer=create_load_balancer,
-    health_check_path="/v1/ping",
-    # Get the OpenAI API key from the local environment
-    env={"OPENAI_API_KEY": getenv("OPENAI_API_KEY", None)},
-    use_cache=ws_settings.use_cache,
-    skip_delete=skip_delete,
-    save_output=save_output,
-    # Do not wait for the service to stabilize
-    wait_for_creation=False,
-    # Uncomment to read secrets from secrets/prd_app_secrets.yml
-    # secrets_file=ws_settings.ws_root.joinpath("workspace/secrets/prd_app_secrets.yml"),
-)
-
 # -*- DockerConfig defining the prd resources
 prd_docker_config = DockerConfig(
     env=ws_settings.prd_env,
@@ -175,7 +147,7 @@ prd_docker_config = DockerConfig(
 # -*- AwsConfig defining the prd resources
 prd_aws_config = AwsConfig(
     env=ws_settings.prd_env,
-    apps=[prd_streamlit, prd_fastapi],
+    apps=[prd_streamlit],
     resources=AwsResourceGroup(
         secrets=[prd_app_secret],
         security_groups=[prd_lb_sg, prd_app_sg],

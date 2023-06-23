@@ -7,15 +7,13 @@ from phidata.workspace.settings import WorkspaceSettings
 #
 ws_settings = WorkspaceSettings(
     # Workspace name: used for naming cloud resources
-    ws_name="llm",
+    ws_name="streamlit",
     # Path to the workspace root
     ws_root=Path(__file__).parent.parent.resolve(),
     # -*- Dev settings
     dev_env="dev",
     # -*- Dev Apps
     dev_app_enabled=True,
-    dev_api_enabled=True,
-    dev_jupyter_enabled=True,
     # -*- Production settings
     prd_env="prd",
     # -*- Production Apps
@@ -33,7 +31,7 @@ ws_settings = WorkspaceSettings(
     # Repository for images
     # image_repo="[ACCOUNT_ID].dkr.ecr.us-east-2.amazonaws.com",
     # Build images locally
-    # build_images=True,
+    build_images=True,
     # Push images after building
     # push_images=True,
 )

@@ -1,6 +1,6 @@
-## LLM App
+## Streamlit App
 
-This repo contains the code for running an LLM App in 2 environments:
+This repo contains the code for running an Streamlit App in 2 environments:
 
 1. dev: A development env running locally using docker
 2. prd: A production env running on AWS ECS
@@ -9,13 +9,13 @@ This repo contains the code for running an LLM App in 2 environments:
 
 1. Clone the git repo
 
-> from the `llm-app` dir:
+> from the `streamlit-app` dir:
 
 2. Create + activate a virtual env:
 
 ```sh
-python3 -m venv llmenv
-source llmenv/bin/activate
+python3 -m venv streamlitenv
+source streamlitenv/bin/activate
 ```
 
 3. Install `phidata`:
@@ -42,7 +42,7 @@ cp -r workspace/example_secrets workspace/secrets
 cp example.env .env
 ```
 
-## Run LLM App locally using docker
+## Run Streamlit App locally using docker
 
 The `workspace/dev_resources.py` file contains the code for the development resources.
 
@@ -65,8 +65,6 @@ phi ws up dev:docker
 ```
 
 - Open [localhost:9095](http://localhost:9095) to view the Streamlit App.
-- Open [localhost:9090/docs](http://localhost:9090/docs) to view the FastApi docs.
-- Open [localhost:8888](http://localhost:8888) to view JupyterLab UI.
 
 ## Update python libraries
 
@@ -136,7 +134,7 @@ Delete dev resources using:
 phi ws down dev:docker
 ```
 
-## Run LLM App in production on AWS
+## Run streamlit App in production on AWS
 
 The `workspace/prd_resources.py` file contains the code for the production resources. To run in production:
 

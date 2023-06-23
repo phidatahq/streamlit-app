@@ -51,7 +51,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["api", "app", "notebooks", "llm", "tests", "utils", "workspace"]
+packages = ["app", "llm", "tests", "utils", "workspace"]
 
 # Change this value to use a different directory for the phidata workspace.
 # [tool.phidata]

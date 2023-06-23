@@ -1,11 +1,9 @@
 from os import getenv
 
-from phidata.app.fastapi import FastApiServer
 from phidata.app.streamlit import StreamlitApp
 from phidata.docker.config import DockerConfig
 from phidata.docker.resource.image import DockerImage
 
-from workspace.jupyter.lab import dev_jupyter
 from workspace.settings import ws_settings
 
 #
@@ -37,23 +35,9 @@ dev_streamlit = StreamlitApp(
     secrets_file=ws_settings.ws_root.joinpath("workspace/secrets/dev_app_secrets.yml"),
 )
 
-# -*- FastApiServer running on port 9090
-dev_fastapi = FastApiServer(
-    name=f"{ws_settings.dev_key}-api",
-    enabled=ws_settings.dev_api_enabled,
-    image=dev_image,
-    command="api start -r",
-    mount_workspace=True,
-    # Get the OpenAI API key from the local environment
-    env={"OPENAI_API_KEY": getenv("OPENAI_API_KEY", None)},
-    use_cache=ws_settings.use_cache,
-    # Read secrets from secrets/dev_app_secrets.yml
-    secrets_file=ws_settings.ws_root.joinpath("workspace/secrets/dev_app_secrets.yml"),
-)
-
 # -*- DockerConfig defining the dev resources
 dev_docker_config = DockerConfig(
     env=ws_settings.dev_env,
     network=ws_settings.ws_name,
-    apps=[dev_streamlit, dev_fastapi, dev_jupyter],
+    apps=[dev_streamlit],
 )

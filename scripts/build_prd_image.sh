@@ -6,7 +6,7 @@ CURR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 WS_ROOT="$( dirname ${CURR_DIR} )"
 DOCKER_FILE="Dockerfile"
 REPO="repo"
-NAME="llm"
+NAME="streamlit"
 TAG="prd"
 
 # Run docker buildx create --use before running this script
