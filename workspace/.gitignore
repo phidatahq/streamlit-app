@@ -1,0 +1,5 @@
+# ignore outputs
+output
+
+# ignore secrets
+secrets
