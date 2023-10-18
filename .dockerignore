@@ -27,6 +27,7 @@ Pipfile.lock
 venv*
 aienv*
 apienv*
+appenv*
 llmenv*
 
 .ipynb_checkpoints
