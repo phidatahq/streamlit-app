@@ -14,8 +14,8 @@ This repo contains the code for running a Streamlit App in 2 environments:
 2. Create + activate a virtual env:
 
 ```sh
-python3 -m venv llmenv
-source llmenv/bin/activate
+python3 -m venv aienv
+source aienv/bin/activate
 ```
 
 3. Install `phidata`:

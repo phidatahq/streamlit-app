@@ -5,7 +5,7 @@ Steps to migrate the database using alembic:
 1. Add/update SqlAlchemy tables in the `db/tables` directory.
 2. Import the SqlAlchemy class in the `db/tables/__init__.py` file.
 3. Create a database revision using: `alembic -c db/alembic.ini revision --autogenerate -m "Revision Name"`
-4. Upgrade database using: `alembic -c db/alembic.ini upgrade head`
+4. Migrate database using: `alembic -c db/alembic.ini upgrade head`
 
 > Note: Set Env Var `MIGRATE_DB = True` to run the database migration in the entrypoint script at container startup.
 
