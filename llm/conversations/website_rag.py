@@ -40,19 +40,17 @@ def get_website_rag_conversation(
         """,
         user_prompt_function=lambda message, references, **kwargs: f"""\
         Use the following information from the knowledge base if it helps.
-        START OF KNOWLEDGE BASE
-        ```
+        <knowledge_base>
         {references}
-        ```
-        END OF KNOWLEDGE BASE
+        </knowledge_base>
 
-        Your task is to respond to the following message:
+        Respond to the following message:
         USER: {message}
         ASSISTANT:
         """,
         # This setting populates the "references" variable to the user prompt function
         add_references_to_prompt=True,
-        # This setting adds previous 8 messages to the API call
+        # This setting adds the last 8 messages to the API call
         add_chat_history_to_messages=True,
         meta_data={"conversation_type": "RAG"},
     )

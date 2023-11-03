@@ -9,24 +9,22 @@ Steps to migrate the database using alembic:
 
 > Note: Set Env Var `MIGRATE_DB = True` to run the database migration in the entrypoint script at container startup.
 
+Checkout the docs on [adding database tables](https://docs.phidata.com/day-2/database-tables).
+
 ## Creat a database revision using alembic
 
-SSH into the dev container and run the alembic command to create a database migration.
+Run the alembic command to create a database migration in the dev container:
 
 ```bash
-docker exec -it streamlit-dev zsh
-
-alembic -c db/alembic.ini revision --autogenerate -m "Initialize DB"
+docker exec -it streamlit-dev alembic -c db/alembic.ini revision --autogenerate -m "Initialize DB"
 ```
 
 ## Migrate development database
 
-SSH into the dev container and run the alembic command to migrate the database.
+Run the alembic command to migrate the dev database:
 
 ```bash
-docker exec -it streamlit-dev zsh
-
-alembic -c db/alembic.ini upgrade head
+docker exec -it streamlit-dev alembic -c db/alembic.ini upgrade head
 ```
 
 ## Migrate production database
@@ -43,11 +41,7 @@ aws ecs execute-command --cluster $ECS_CLUSTER \
     --task $TASK_ARN \
     --container $CONTAINER_NAME \
     --interactive \
-    --command "zsh"
-```
-
-```bash
-alembic -c db/alembic.ini upgrade head
+    --command "alembic -c db/alembic.ini upgrade head"
 ```
 
 ---

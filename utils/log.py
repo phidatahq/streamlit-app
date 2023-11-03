@@ -4,9 +4,7 @@ import logging
 def build_logger(logger_name: str) -> logging.Logger:
     from rich.logging import RichHandler
 
-    rich_handler = RichHandler(
-        show_time=False, rich_tracebacks=False, tracebacks_show_locals=False
-    )
+    rich_handler = RichHandler(show_time=False, rich_tracebacks=False, tracebacks_show_locals=False)
     rich_handler.setFormatter(
         logging.Formatter(
             fmt="%(message)s",

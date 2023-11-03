@@ -3,10 +3,9 @@ name: Build ECR Images
 on: workflow_dispatch
 
 permissions:
-  contents:
-    read
-    # For AWS OIDC Token access as per https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#updating-your-github-actions-workflow
-  id-token: write
+  # For AWS OIDC Token access as per https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#updating-your-github-actions-workflow
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
 
 env:
   ECR_REPO: YOUR ECR REPO
@@ -15,60 +14,31 @@ env:
   AWS_REGION: us-east-1
 
 jobs:
-  build-dev-image:
+  build-app-image:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       # https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ env.AWS_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
       # https://github.com/marketplace/actions/amazon-ecr-login-action-for-github-actions
       - name: ECR Login
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@v2
       - name: Build, tag, and push docker image to Amazon ECR
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.ECR_REPO }}/streamlit:dev
-
-  build-prd-image:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      # https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          role-to-assume: ${{ env.AWS_ROLE }}
-          aws-region: ${{ env.AWS_REGION }}
-      # https://github.com/marketplace/actions/amazon-ecr-login-action-for-github-actions
-      - name: ECR Login
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-      - name: Build, tag, and push docker image to Amazon ECR
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: Dockerfile
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ env.ECR_REPO }}/streamlit:prd
+          tags: ${{ env.ECR_REPO }}/streamlit:dev, ${{ env.ECR_REPO }}/streamlit:prd

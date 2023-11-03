@@ -10,7 +10,7 @@ on:
       - "main"
 
 jobs:
-  format-lint:
+  validate:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,19 +25,19 @@ jobs:
           cache: "pip"
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade \
+          python -m pip install -U \
             pip setuptools wheel \
-            black mypy pytest ruff
+            mypy pytest ruff
           pip install --no-deps -r requirements.txt
-      - name: Format with black
+      - name: Format with ruff
         run: |
-          black .
+          ruff format .
+      - name: Lint with ruff
+        run: |
+          ruff check .
       - name: Type-check with mypy
         run: |
           mypy .
       - name: Test with pytest
         run: |
           pytest .
-      - name: Lint with ruff
-        run: |
-          ruff .

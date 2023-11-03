@@ -42,7 +42,7 @@ def get_pdf_auto_conversation(
         - Keep your answers short and concise, under 5 sentences.
         """,
         user_prompt_function=lambda message, **kwargs: f"""\
-        Your task is to respond to the following message:
+        Respond to the following message:
         USER: {message}
         ASSISTANT:
         """,

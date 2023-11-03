@@ -2,7 +2,7 @@
 
 ############################################################################
 #
-# Run this script to format using black
+# Run this script to format using ruff
 # Usage:
 #   ./scripts/format.sh
 ############################################################################
@@ -13,8 +13,8 @@ source ${CURR_DIR}/_utils.sh
 
 main() {
   print_heading "Formatting workspace..."
-  print_heading "Running: black ${REPO_ROOT}"
-  black ${REPO_ROOT}
+  print_heading "Running: ruff format ${REPO_ROOT}"
+  ruff format ${REPO_ROOT}
 }
 
 main "$@"

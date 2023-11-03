@@ -2,7 +2,7 @@ from typing import Optional
 
 from phi.conversation import Conversation
 from phi.llm.openai import OpenAIChat
-from phi.llm.function.website import WebsiteRegistry
+from phi.llm.agent.website import WebsiteAgent
 
 from llm.settings import llm_settings
 from llm.storage import website_conversation_storage
@@ -30,13 +30,12 @@ def get_website_auto_conversation(
         monitoring=True,
         function_calls=True,
         show_function_calls=True,
-        function_registries=[
-            WebsiteRegistry(knowledge_base=website_knowledge_base),
-        ],
+        agents=[WebsiteAgent(knowledge_base=website_knowledge_base)],
         system_prompt="""\
         You are a chatbot named 'phi' designed to help users.
-        You have access to a knowledge base of website contents that you can search to answer questions.
+        You have access to functions to search a knowledge base of website contents.
         You also have access to functions to add new websites to the knowledge base.
+        Only add 'https://' websites.
 
         Follow these guidelines when answering questions:
         - Search the knowledge base for answers.
@@ -48,7 +47,7 @@ def get_website_auto_conversation(
         - Keep your answers short and concise, under 5 sentences.
         """,
         user_prompt_function=lambda message, **kwargs: f"""\
-        Your task is to respond to the following message:
+        Respond to the following message:
         USER: {message}
         ASSISTANT:
         """,

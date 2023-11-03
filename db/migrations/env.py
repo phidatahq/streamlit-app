@@ -25,6 +25,7 @@ config.set_main_option("sqlalchemy.url", db_url)
 # target_metadata = mymodel.Base.metadata
 target_metadata = Base.metadata
 
+
 # -*- Only include tables that are in the target_metadata
 # See: https://alembic.sqlalchemy.org/en/latest/autogenerate.html#omitting-table-names-from-the-autogenerate-process
 def include_name(name, type_, parent_names):

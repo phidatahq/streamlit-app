@@ -50,9 +50,7 @@ prd_secret = SecretsManager(
     name=f"{ws_settings.prd_key}-secret",
     group="app",
     # Create secret from workspace/secrets/prd_app_secrets.yml
-    secret_files=[
-        ws_settings.ws_root.joinpath("workspace/secrets/prd_app_secrets.yml")
-    ],
+    secret_files=[ws_settings.ws_root.joinpath("workspace/secrets/prd_app_secrets.yml")],
     skip_delete=skip_delete,
     save_output=save_output,
 )
