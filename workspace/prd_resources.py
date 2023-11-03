@@ -1,14 +1,13 @@
 from os import getenv
 
 from phi.aws.app.streamlit import Streamlit
-from phi.aws.resource.ec2.security_group import InboundRule, SecurityGroup
 from phi.aws.resources import AwsResources
-from phi.aws.resource.ecs.cluster import EcsCluster
-from phi.aws.resource.rds.db_instance import DbInstance
-from phi.aws.resource.rds.db_subnet_group import DbSubnetGroup
+from phi.aws.resource.ecs import EcsCluster
+from phi.aws.resource.ec2 import SecurityGroup, InboundRule
+from phi.aws.resource.rds import DbInstance, DbSubnetGroup
 from phi.aws.resource.reference import AwsReference
-from phi.aws.resource.s3.bucket import S3Bucket
-from phi.aws.resource.secret.manager import SecretsManager
+from phi.aws.resource.s3 import S3Bucket
+from phi.aws.resource.secret import SecretsManager
 from phi.docker.resources import DockerResources
 from phi.docker.resource.image import DockerImage
 
@@ -95,7 +94,7 @@ prd_sg = SecurityGroup(
         InboundRule(
             description="Allow traffic from LB to the Streamlit app",
             port=8501,
-            source_security_group_id=AwsReference(prd_lb_sg.get_security_group_id),
+            security_group_id=AwsReference(prd_lb_sg.get_security_group_id),
         ),
     ],
     depends_on=[prd_lb_sg],
@@ -113,7 +112,7 @@ prd_db_sg = SecurityGroup(
         InboundRule(
             description="Allow traffic from apps to the database",
             port=prd_db_port,
-            source_security_group_id=AwsReference(prd_sg.get_security_group_id),
+            security_group_id=AwsReference(prd_sg.get_security_group_id),
         ),
     ],
     depends_on=[prd_sg],
@@ -132,23 +131,23 @@ prd_db_subnet_group = DbSubnetGroup(
 )
 
 # -*- RDS Database Instance
-db_engine = "postgres"
 prd_db = DbInstance(
     name=f"{ws_settings.prd_key}-db",
     enabled=ws_settings.prd_db_enabled,
     group="db",
     db_name="llm",
-    engine=db_engine,
     port=prd_db_port,
+    engine="postgres",
     engine_version="15.4",
     allocated_storage=64,
     # NOTE: For production, use a larger instance type.
-    # Last checked price: $0.0320 hourly hourly = ~$25 per month
-    db_instance_class="db.t4g.small",
-    availability_zone=ws_settings.aws_az1,
-    db_subnet_group=prd_db_subnet_group,
-    enable_performance_insights=True,
+    # Last checked price: $0.0650 hourly = ~$50 per month
+    db_instance_class="db.t4g.medium",
     db_security_groups=[prd_db_sg],
+    db_subnet_group=prd_db_subnet_group,
+    availability_zone=ws_settings.aws_az1,
+    publicly_accessible=False,
+    enable_performance_insights=True,
     aws_secret=prd_db_secret,
     skip_delete=skip_delete,
     save_output=save_output,
