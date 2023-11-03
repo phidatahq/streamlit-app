@@ -80,4 +80,4 @@ phi ws down
 - [Secret management](https://docs.phidata.com/day-2/secrets)
 - [CI/CD](https://docs.phidata.com/day-2/ci-cd)
 - [Add database tables](https://docs.phidata.com/day-2/database-tables)
-- [Read the LLM App guide](https://docs.phidata.com/templates/llm-app)
+- [Read the Streamlit App guide](https://docs.phidata.com/templates/streamlit-app)
