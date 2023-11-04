@@ -48,7 +48,7 @@ def get_pdf_rag_conversation(
         USER: {message}
         ASSISTANT:
         """,
-        # This setting populates the "references" variable to the user prompt function
+        # This setting populates the "references" argument of the user prompt function
         add_references_to_prompt=True,
         # This setting adds the last 8 messages to the API call
         add_chat_history_to_messages=True,
