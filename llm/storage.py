@@ -1,4 +1,4 @@
-from phi.conversation.storage.postgres import PgConversationStorage
+from phi.storage.conversation.postgres import PgConversationStorage
 
 from db.session import db_url
 
