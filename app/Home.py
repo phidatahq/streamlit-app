@@ -9,6 +9,7 @@ st.set_page_config(
 
 
 st.title(":snowman: LLM Apps")
+st.markdown('<a href="https://github.com/phidatahq/phidata"><h4>by phidata</h4></a>', unsafe_allow_html=True)
 
 
 def main() -> None:
