@@ -51,5 +51,5 @@ website_knowledge_base = WebsiteKnowledgeBase(
         db_url=db_url,
         schema="llm",
     ),
-    num_documents=2,
+    num_documents=3,
 )
