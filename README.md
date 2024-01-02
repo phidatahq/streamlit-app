@@ -72,12 +72,12 @@ phi ws down
 
 ## Next Steps:
 
-- [Run the Streamlit App on AWS](https://docs.phidata.com/templates/streamlit-app#run-on-aws)
-- [Update the dev application](https://docs.phidata.com/day-2/dev-app)
-- [Update the production application](https://docs.phidata.com/day-2/production-app)
-- [Add python dependencies](https://docs.phidata.com/day-2/python-libraries)
-- [Format & validate your code](https://docs.phidata.com/day-2/format-and-validate)
-- [Secret management](https://docs.phidata.com/day-2/secrets)
-- [CI/CD](https://docs.phidata.com/day-2/ci-cd)
-- [Add database tables](https://docs.phidata.com/day-2/database-tables)
-- [Read the Streamlit App guide](https://docs.phidata.com/templates/streamlit-app)
+- [Run the Streamlit App on AWS](https://docs.phidata.com/templates/streamlit-app/run-aws)
+- Read how to [manage the development application](https://docs.phidata.com/how-to/development-app)
+- Read how to [manage the production application](https://docs.phidata.com/how-to/production-app)
+- Read how to [add python libraries](https://docs.phidata.com/how-to/python-libraries)
+- Read how to [format & validate your code](https://docs.phidata.com/how-to/format-and-validate)
+- Read how to [manage secrets](https://docs.phidata.com/how-to/secrets)
+- Add [CI/CD](https://docs.phidata.com/how-to/ci-cd)
+- Add [database tables](https://docs.phidata.com/how-to/database-tables)
+- Read the [streamlit App guide](https://docs.phidata.com/templates/streamlit-app)
