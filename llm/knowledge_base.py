@@ -42,7 +42,7 @@ pdf_knowledge_base = CombinedKnowledgeBase(
 )
 
 website_knowledge_base = WebsiteKnowledgeBase(
-    urls=["https://www.phidata.com"],
+    urls=["https://docs.phidata.com/introduction"],
     # Number of links to follow from the seed URLs
     max_links=15,
     # Store this knowledge base in llm.website_documents

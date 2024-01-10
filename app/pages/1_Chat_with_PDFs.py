@@ -109,8 +109,8 @@ def main() -> None:
         with st.chat_message("assistant"):
             response = ""
             resp_container = st.empty()
-            for delta in pdf_conversation.chat(question):
-                response += delta
+            for delta in pdf_conversation.run(question):
+                response += delta  # type: ignore
                 resp_container.markdown(response)
 
             st.session_state["messages"].append({"role": "assistant", "content": response})
