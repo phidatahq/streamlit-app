@@ -16,7 +16,7 @@ Checkout the docs on [adding database tables](https://docs.phidata.com/day-2/dat
 Run the alembic command to create a database migration in the dev container:
 
 ```bash
-docker exec -it streamlit-dev alembic -c db/alembic.ini revision --autogenerate -m "Initialize DB"
+docker exec -it streamlit-app-dev alembic -c db/alembic.ini revision --autogenerate -m "Initialize DB"
 ```
 
 ## Migrate development database
@@ -24,7 +24,7 @@ docker exec -it streamlit-dev alembic -c db/alembic.ini revision --autogenerate 
 Run the alembic command to migrate the dev database:
 
 ```bash
-docker exec -it streamlit-dev alembic -c db/alembic.ini upgrade head
+docker exec -it streamlit-app-dev alembic -c db/alembic.ini upgrade head
 ```
 
 ## Migrate production database
@@ -33,9 +33,9 @@ docker exec -it streamlit-dev alembic -c db/alembic.ini upgrade head
 2. **OR** you can SSH into the production container to run the migration manually
 
 ```bash
-ECS_CLUSTER=streamlit-prd-cluster
-TASK_ARN=$(aws ecs list-tasks --cluster streamlit-prd-cluster --query "taskArns[0]" --output text)
-CONTAINER_NAME=streamlit-prd
+ECS_CLUSTER=streamlit-app-prd-cluster
+TASK_ARN=$(aws ecs list-tasks --cluster streamlit-app-prd-cluster --query "taskArns[0]" --output text)
+CONTAINER_NAME=streamlit-app-prd
 
 aws ecs execute-command --cluster $ECS_CLUSTER \
     --task $TASK_ARN \
@@ -51,7 +51,7 @@ aws ecs execute-command --cluster $ECS_CLUSTER \
 > This has already been run and is described here for completeness
 
 ```bash
-docker exec -it streamlit-dev zsh
+docker exec -it streamlit-app-dev zsh
 
 cd db
 alembic init migrations

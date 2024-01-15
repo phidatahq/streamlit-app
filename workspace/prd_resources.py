@@ -184,7 +184,7 @@ container_env = {
 
 # -*- Streamlit running on ECS
 prd_streamlit = Streamlit(
-    name=f"{ws_settings.prd_key}-app",
+    name=ws_settings.prd_key,
     enabled=ws_settings.prd_app_enabled,
     group="app",
     image=prd_image,

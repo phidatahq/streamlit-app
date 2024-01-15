@@ -30,4 +30,4 @@ jobs:
           file: Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ secrets.DOCKERHUB_REPO }}/streamlit:dev, ${{ secrets.DOCKERHUB_REPO }}/streamlit:prd
+          tags: ${{ secrets.DOCKERHUB_REPO }}/streamlit-app:dev, ${{ secrets.DOCKERHUB_REPO }}/streamlit-app:prd

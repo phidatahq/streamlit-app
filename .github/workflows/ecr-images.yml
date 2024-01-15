@@ -41,4 +41,4 @@ jobs:
           file: Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.ECR_REPO }}/streamlit:dev, ${{ env.ECR_REPO }}/streamlit:prd
+          tags: ${{ env.ECR_REPO }}/streamlit-app:dev, ${{ env.ECR_REPO }}/streamlit-app:prd

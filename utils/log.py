@@ -19,4 +19,4 @@ def build_logger(logger_name: str) -> logging.Logger:
     return _logger
 
 
-logger: logging.Logger = build_logger("llm")
+logger: logging.Logger = build_logger("streamlit-app")

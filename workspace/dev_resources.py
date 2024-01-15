@@ -25,11 +25,11 @@ dev_image = DockerImage(
 
 # -*- Dev database running on port 5432:5432
 dev_db = PgVectorDb(
-    name=f"{ws_settings.dev_key}-db",
+    name=f"{ws_settings.ws_name}-db",
     enabled=ws_settings.dev_db_enabled,
-    pg_user="llm",
-    pg_password="llm",
-    pg_database="llm",
+    pg_user="app",
+    pg_password="app",
+    pg_database="app",
     # Connect to this db on port 5432
     host_port=5432,
     debug_mode=True,
@@ -54,7 +54,7 @@ container_env = {
 
 # -*- Streamlit running on port 8501:8501
 dev_streamlit = Streamlit(
-    name=f"{ws_settings.dev_key}-app",
+    name=ws_settings.ws_name,
     enabled=ws_settings.dev_app_enabled,
     image=dev_image,
     command="streamlit run app/Home.py",
