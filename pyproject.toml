@@ -18,6 +18,8 @@ dependencies = [
   "tiktoken",
   "beautifulsoup4",
   "types-beautifulsoup4",
+  "pillow",
+  "types-Pillow",
   # Type checking
   "mypy",
   # Testing
