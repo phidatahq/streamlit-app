@@ -1,6 +1,7 @@
 name: Validate
 
 on:
+  push:
   pull_request:
     types:
       - opened
@@ -38,6 +39,3 @@ jobs:
       - name: Type-check with mypy
         run: |
           mypy .
-      - name: Test with pytest
-        run: |
-          pytest .

@@ -14,9 +14,12 @@ from ai.assistants.website_auto import get_autonomous_website_assistant
 from ai.assistants.website_rag import get_rag_website_assistant
 from utils.log import logger
 
-
-st.title(":snowman: Website Assistant")
-st.markdown('<a href="https://github.com/phidatahq/phidata"><h4>by phidata</h4></a>', unsafe_allow_html=True)
+st.set_page_config(
+    page_title="Website AI",
+    page_icon=":orange_heart:",
+)
+st.title("Website Assistant")
+st.markdown("##### :orange_heart: built using [phidata](https://github.com/phidatahq/phidata)")
 
 
 def restart_assistant():
@@ -34,7 +37,8 @@ def main() -> None:
     if username:
         st.sidebar.info(f":technologist: User: {username}")
     else:
-        st.write(":technologist: Please enter a username")
+        st.markdown("---")
+        st.markdown("#### :technologist: Enter a username, load a website and start chatting")
         return
 
     # Get assistant type
@@ -106,11 +110,12 @@ def main() -> None:
     if last_message.get("role", "") == "user":
         question = last_message["content"]
         with st.chat_message("assistant"):
-            response = ""
-            resp_container = st.empty()
-            for delta in website_assistant.run(question):
-                response += delta  # type: ignore
-                resp_container.markdown(response)
+            with st.spinner("Working..."):
+                response = ""
+                resp_container = st.empty()
+                for delta in website_assistant.run(question):
+                    response += delta  # type: ignore
+                    resp_container.markdown(response)
 
             st.session_state["messages"].append({"role": "assistant", "content": response})
 

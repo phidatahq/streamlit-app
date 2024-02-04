@@ -13,14 +13,11 @@ from workspace.settings import ws_settings
 
 # -*- Dev image
 dev_image = DockerImage(
-    name=f"{ws_settings.image_repo}/{ws_settings.ws_name}",
+    name=f"{ws_settings.image_repo}/{ws_settings.image_name}",
     tag=ws_settings.dev_env,
     enabled=ws_settings.build_images,
     path=str(ws_settings.ws_root),
-    pull=ws_settings.force_pull_images,
-    # Uncomment to push the dev image
-    # push_image=ws_settings.push_images,
-    skip_docker_cache=ws_settings.skip_image_cache,
+    push_image=False,
 )
 
 # -*- Dev database running on port 5432:5432

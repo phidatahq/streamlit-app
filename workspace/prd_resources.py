@@ -25,14 +25,12 @@ create_load_balancer: bool = True
 
 # -*- Production image
 prd_image = DockerImage(
-    name=f"{ws_settings.image_repo}/{ws_settings.ws_name}",
+    name=f"{ws_settings.image_repo}/{ws_settings.image_name}",
     tag=ws_settings.prd_env,
     enabled=ws_settings.build_images,
     path=str(ws_settings.ws_root),
-    platform="linux/amd64",
-    pull=ws_settings.force_pull_images,
-    push_image=ws_settings.push_images,
-    skip_docker_cache=ws_settings.skip_image_cache,
+    platforms=["linux/amd64", "linux/arm64"],
+    push_image=True,
 )
 
 # -*- S3 bucket for production data (set enabled=True when needed)
