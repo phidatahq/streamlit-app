@@ -22,8 +22,6 @@ dependencies = [
   "types-Pillow",
   # Type checking
   "mypy",
-  # Testing
-  "pytest",
   # Linting and Formatting
   "ruff",
   # phidata
