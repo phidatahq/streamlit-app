@@ -4,21 +4,19 @@ from phi.knowledge.pdf import PDFUrlKnowledgeBase, PDFKnowledgeBase
 from phi.knowledge.website import WebsiteKnowledgeBase
 from phi.vectordb.pgvector import PgVector2
 
+from ai.settings import ai_settings
 from db.session import db_url
 
 pdf_knowledge_base = CombinedKnowledgeBase(
     sources=[
-        PDFUrlKnowledgeBase(
-            urls=["https://www.family-action.org.uk/content/uploads/2019/07/meals-more-recipes.pdf"]
-        ),
+        PDFUrlKnowledgeBase(urls=["https://phi-public.s3.amazonaws.com/recipes/ThaiRecipes.pdf"]),
         PDFKnowledgeBase(path="data/pdfs"),
     ],
-    # Store this knowledge base in ai.pdf_documents
     vector_db=PgVector2(
-        schema="ai",
         db_url=db_url,
+        # Store the embeddings in ai.pdf_documents
         collection="pdf_documents",
-        embedder=OpenAIEmbedder(model="text-embedding-3-small"),
+        embedder=OpenAIEmbedder(model=ai_settings.embedding_model),
     ),
     # 2 references are added to the prompt
     num_documents=2,
@@ -29,12 +27,11 @@ website_knowledge_base = WebsiteKnowledgeBase(
     # urls=["https://docs.phidata.com/introduction"],
     # Number of links to follow from the seed URLs
     max_links=15,
-    # Store this knowledge base in ai.website_documents
     vector_db=PgVector2(
-        schema="ai",
         db_url=db_url,
+        # Store the embeddings in ai.website_documents
         collection="website_documents",
-        embedder=OpenAIEmbedder(model="text-embedding-3-small"),
+        embedder=OpenAIEmbedder(model=ai_settings.embedding_model),
     ),
     # 3 references are added to the prompt
     num_documents=3,
