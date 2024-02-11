@@ -30,7 +30,8 @@ def get_rag_pdf_assistant(
         add_references_to_prompt=True,
         # This setting adds the last 6 messages from the chat history to the API call
         add_chat_history_to_messages=True,
-        monitoring=True,
+        # Enable monitoring on phidata.app
+        # monitoring=True,
         debug_mode=debug_mode,
         description="You are a helpful assistant named 'phi' designed to answer questions about PDF contents.",
         extra_instructions=[

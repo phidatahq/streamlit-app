@@ -24,7 +24,8 @@ def get_image_assistant(
             temperature=ai_settings.default_temperature,
         ),
         storage=image_assistant_storage,
-        monitoring=True,
+        # Enable monitoring on phidata.app
+        # monitoring=True,
         debug_mode=debug_mode,
         assistant_data={"assistant_type": "multimodal"},
     )

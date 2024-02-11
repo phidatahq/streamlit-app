@@ -26,7 +26,8 @@ def get_autonomous_pdf_assistant(
         ),
         storage=pdf_assistant_storage,
         knowledge_base=pdf_knowledge_base,
-        monitoring=True,
+        # Enable monitoring on phidata.app
+        # monitoring=True,
         use_tools=True,
         show_tool_calls=True,
         debug_mode=debug_mode,
