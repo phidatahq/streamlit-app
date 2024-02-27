@@ -127,7 +127,7 @@ def main() -> None:
 
     if pdf_assistant.knowledge_base:
         if st.sidebar.button("Update Knowledge Base"):
-            pdf_assistant.knowledge_base.load(recreate=False)
+            pdf_assistant.knowledge_base.load(recreate=False, upsert=True)
             st.session_state["pdf_knowledge_base_loaded"] = True
             st.sidebar.success("Knowledge base updated")
 

@@ -139,8 +139,8 @@ prd_db = DbInstance(
     engine_version="16.1",
     allocated_storage=64,
     # NOTE: For production, use a larger instance type.
-    # Last checked price: $0.0650 hourly = ~$50 per month
-    db_instance_class="db.t4g.medium",
+    # Last checked price: ~$25 per month
+    db_instance_class="db.t4g.small",
     db_security_groups=[prd_db_sg],
     db_subnet_group=prd_db_subnet_group,
     availability_zone=ws_settings.aws_az1,
