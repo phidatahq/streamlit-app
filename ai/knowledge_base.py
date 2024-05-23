@@ -25,6 +25,7 @@ pdf_knowledge_base = CombinedKnowledgeBase(
 website_knowledge_base = WebsiteKnowledgeBase(
     # Add URLs to the knowledge base
     # urls=["https://docs.phidata.com/introduction"],
+    max_depth=1,
     # Number of links to follow from the seed URLs
     max_links=15,
     vector_db=PgVector2(

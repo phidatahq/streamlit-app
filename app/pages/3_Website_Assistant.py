@@ -134,9 +134,10 @@ def main() -> None:
             st.sidebar.success("Knowledge base recreated")
 
         if st.sidebar.button("Clear Knowledge Base"):
-            website_assistant.knowledge_base.vector_db.clear()
-            st.session_state["pdf_knowledge_base_loaded"] = False
-            st.sidebar.success("Knowledge base cleared")
+            if website_assistant.knowledge_base.vector_db:
+                website_assistant.knowledge_base.vector_db.clear()
+                st.session_state["pdf_knowledge_base_loaded"] = False
+                st.sidebar.success("Knowledge base cleared")
 
     if st.sidebar.button("Auto Rename"):
         website_assistant.auto_rename_run()
